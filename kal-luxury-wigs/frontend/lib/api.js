@@ -4,7 +4,7 @@ import { useAuthStore } from './store';
 
 // Use production backend in production, localhost in development
 const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://kal-luxury-wigs-2.onrender.com'
+  ? 'https://kal-luxury-wigs-4.onrender.com'
   : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000');
 
 class ApiError extends Error {
