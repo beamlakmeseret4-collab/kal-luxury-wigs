@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 'use client';
 
 import { useState } from 'react';
@@ -8,7 +9,7 @@ import Button from '@/components/ui/Button';
 import { useLogin, useRegister } from '@/lib/hooks';
 import { useAuthStore, useToastStore } from '@/lib/store';
 
-export const dynamic = 'force-dynamic';
+
 
 export default function LoginPage() {
   const router = useRouter();

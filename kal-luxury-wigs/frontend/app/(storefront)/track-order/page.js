@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 'use client';
 
 import { useState } from 'react';
@@ -8,7 +9,7 @@ import { PageSpinner } from '@/components/ui/Feedback';
 import { useTrackOrder } from '@/lib/hooks';
 import { formatPrice, isValidEthiopianPhone } from '@/lib/utils';
 
-export const dynamic = 'force-dynamic';
+
 
 export default function TrackOrderPage() {
   const [orderNumber, setOrderNumber] = useState('');
