@@ -30,8 +30,19 @@ const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
   .split(',')
   .map((s) => s.trim());
 
+// Vercel gives every deploy its own URL (a stable production domain, PLUS a
+// new one for every preview/branch build) — only Vercel can ever deploy to
+// a *.vercel.app subdomain, so trusting that whole domain is safe and means
+// CORS never breaks again just because the exact URL changed on a redeploy.
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+  if (allowedOrigins.includes(origin)) return true;
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)) return true;
+  return false;
+};
+
 const io = new Server(server, {
-  cors: { origin: allowedOrigins, credentials: true },
+  cors: { origin: isAllowedOrigin, credentials: true },
 });
 app.set('io', io);
 initSockets(io);
@@ -41,7 +52,7 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      if (isAllowedOrigin(origin)) return callback(null, true);
       return callback(new Error('Not allowed by CORS'));
     },
     credentials: true,

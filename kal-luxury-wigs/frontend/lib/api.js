@@ -1,11 +1,10 @@
-// Thin fetch wrapper around the backend API.
+// Thin fetch wrapper around the backend API. Centralizing this means the
+// auth token, error shape, and base URL are handled once instead of in
+// every component.
 
 import { useAuthStore } from './store';
 
-// Use production backend in production, localhost in development
-const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://kal-luxury-wigs-4.onrender.com'
-  : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000');
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 class ApiError extends Error {
   constructor(message, status, errors) {
