@@ -24,6 +24,11 @@ const newsletterRoutes = require('./routes/newsletterRoutes');
 connectDB();
 
 const app = express();
+// Render (and most hosts) sit behind a reverse proxy that terminates HTTPS
+// and forwards to this app over plain HTTP internally. Without this,
+// req.protocol always reports 'http' even on your real https:// site,
+// which produces broken (mixed-content-blocked) image URLs.
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 
 const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
