@@ -136,7 +136,7 @@ const getRelatedProducts = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const body = { ...req.body };
 
-  ['availableColors', 'availableSizes', 'styleTags'].forEach((key) => {
+  ['availableColors', 'availableSizes', 'styleTags', 'specifications'].forEach((key) => {
     if (typeof body[key] === 'string') {
       try {
         body[key] = JSON.parse(body[key]);
@@ -165,7 +165,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 
   const body = { ...req.body };
-  ['availableColors', 'availableSizes', 'styleTags', 'existingImages'].forEach((key) => {
+  ['availableColors', 'availableSizes', 'styleTags', 'specifications', 'existingImages'].forEach((key) => {
     if (typeof body[key] === 'string') {
       try {
         body[key] = JSON.parse(body[key]);
