@@ -10,7 +10,7 @@ import { ProductBadge } from '@/components/ui/Feedback';
 import ReviewsSection from './ReviewsSection';
 import ProductGrid from './ProductGrid';
 import { useRelatedProducts, useWishlist, useToggleWishlist } from '@/lib/hooks';
-import { useCartStore, useToastStore, useRecentlyViewedStore, useAuthStore } from '@/lib/store';
+import { useCartStore, useToastStore, useRecentlyViewedStore, useAuthStore, useUIStore } from '@/lib/store';
 import { formatPrice } from '@/lib/utils';
 import { textureLabels, laceLabels } from '@/lib/siteConfig';
 
@@ -27,6 +27,7 @@ export default function ProductDetail({ product, isPage = false }) {
 
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartStore((s) => s.openCart);
+  const closeQuickView = useUIStore((s) => s.closeQuickView);
   const showToast = useToastStore((s) => s.showToast);
   const addRecentlyViewed = useRecentlyViewedStore((s) => s.addRecentlyViewed);
   const { data: related } = useRelatedProducts(product._id);
@@ -70,14 +71,16 @@ export default function ProductDetail({ product, isPage = false }) {
     qty,
   });
 
-  const handleAddToCart = () => {
+ const handleAddToCart = () => {
     addItem(cartItem());
     showToast(`Added ${product.name} to your bag`);
+    closeQuickView();
     openCart();
   };
 
   const handleBuyNow = () => {
     addItem(cartItem());
+    closeQuickView();
     router.push('/checkout');
   };
 
