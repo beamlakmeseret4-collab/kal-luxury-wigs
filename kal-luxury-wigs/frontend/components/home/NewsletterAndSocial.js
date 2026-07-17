@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Instagram, Send } from 'lucide-react';
+import { Music2, Send } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { Input } from '@/components/ui/FormFields';
 import { useSubscribeNewsletter } from '@/lib/hooks';
 import { useToastStore } from '@/lib/store';
 
 const galleryPlaceholders = Array.from({ length: 6 }).map((_, i) =>
-  `https://placehold.co/400x400/1F1912/AD8544?text=%40kalluxurywigshop`
+  `https://placehold.co/400x400/1F1912/AD8544?text=%kal_luxury_wig_shop`
 );
 
 export default function NewsletterAndSocial() {
@@ -54,12 +54,12 @@ export default function NewsletterAndSocial() {
 
         <div>
           <div className="mb-3 flex items-center gap-2 text-sm text-charcoal/60">
-            <Instagram className="h-4 w-4" /> Follow along — swap these tiles for your real posts
+            <Music2 className="h-4 w-4" /> Follow along on TikTok — swap these tiles for your real posts
           </div>
           <div className="grid grid-cols-3 gap-2">
             {galleryPlaceholders.map((src, i) => (
               <div key={i} className="relative aspect-square overflow-hidden rounded-lg bg-ink/5">
-                <Image src={src} alt="Instagram placeholder" fill sizes="150px" className="object-cover" />
+                <Image src={src} alt="TikTok placeholder" fill sizes="150px" className="object-cover" />
               </div>
             ))}
           </div>
